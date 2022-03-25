@@ -1,0 +1,115 @@
+---
+title: "Regresión"
+author: "Oscar García Cervantes - Taller de economía cuantitativa VI"
+date: "`r format(Sys.time(), '%A %d de %B, %Y')`"
+output:
+     html_document:
+           toc: true
+           toc_float:
+                   collapsed: false
+                   smooth_scroll: false
+           toc_depth: 3       
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.align = 'center', echo = TRUE)
+```
+
+## 1. Paqueterías
+
+Utilizaremos las siguientes paqueterías: `tidiverse`, `wooldridge`, `broom` y `jtools`.
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(wooldridge)
+library(broom)
+```
+
+La paquetería `wooldridge` nos permite utilizar los datos utilizados en ejemplos y en las actividades del libro **Introducción a la econometría** de [**Jeffrey M. Wooldridge**](https://twitter.com/jmwooldridge). Al cargar esta paquetería las bases de datos se encuentran disponibles en la memoria.
+
+## 2. Bases de datos
+
+El conjunto de bases de datos disponibles con la paquetería `wooldridge` se encuentran en el siguiente enlace: <https://cran.r-project.org/web/packages/wooldridge/wooldridge.pdf>.
+
+Para la interpretación de los coeficientes se recomienda revisar la **Tabla 2.3 Resumen de las formas funcionales en las que se emplean logaritmos** ubicada en la página 46 del de Wooldridge.
+
+## 3. Visualización y regresión lineal
+
+### Ejemplos 3.1 y 3.4 *Determinantes del promedio en la universidad*
+
+Para el ejemplo 3.1 y 3.4 (pp. 75 y 81) utilizamos la base **gpa1**. Como primer paso damos un vistazo a la base.
+
+```{r}
+str(gpa1)
+summary(gpa1)
+```
+
+Tenemos una base de datos con 29 variables y 141 observaciones.
+
+El modelo propuesto en el ejemplo 3.1 es el siguiente:
+
+$$\hat{colGPA}=\beta_0+\beta_1hsGPA+\beta_2ACT+u$$ 
+donde $colGPA$ es el promedio general de calificaciones en la universidad, $hsGPA$ es el promedio general de calificaciones en el bachillerato y $ACT$ es la puntuación en el examen de admisión ala universidad. El modelo predice el promedio general de calificaciones en la universidad, a partir del promedio general de calificaciones en el bachillerato y de la calificación en el examen de admisión.
+
+Primero visualizamos los datos:
+
+```{r}
+ggplot(gpa1, aes(hsGPA, colGPA, size = ACT)) +
+        geom_point(shape = 15, color = "#458B74")
+```
+
+Ahora realizamos la estimación mediante MCO:
+
+```{r}
+modelo1 <- lm(colGPA ~ hsGPA + ACT, data = gpa1)
+summary(modelo1)
+tidy(modelo1)
+```
+
+Obtenemos la siguiente función de regresión:
+
+$$\hat{colGPA}=1.29+0.453hsGPA+0.0094ACT+u$$
+
+Respecto a la bondad de ajuste obtenemos lo siguiente:
+
+```{r}
+glance(modelo1)
+```
+
+La $R^2$ obtenida nos indica que en esta muestra de estudiantes $hsGPA$ y $ACT$ juntos, explican de manera aproximada **17.6%** de la variación en el promedio de calificaciones en la universidad. 
+
+
+
+### Ejemplo 3.2 *Ecuación para el salario por hora*
+
+- Base: wage1
+- Modelo:
+$$\hat{log(wage)}=\beta_0+\beta_1educ+\beta_2exper+\beta_3tenure+u$$
+donde $wage$ corresponde al salario por hora, $educ$ a los años de educación, $exper$ a los años de experiencia en el mercado laboral y $tenure$ a los años de antigüedad en el empleo actual.
+
+Realizamos la estimación miediante el método de MCO:
+
+```{r}
+modelo2 <- lm(log(wage) ~ educ + exper + tenure, data = wage1)
+tidy(modelo2)
+```
+
+Obtenemos la siguiente función de regresión:
+$$\hat{log(wage)}=.284+.092educ+.0041exper+.022tenure+u$$
+
+Respecto a la bondad de ajuste obtenemos lo siguiente:
+
+```{r}
+glance(modelo2)
+```
+
+La $R^2$ nos indica que en esta muestra las variables independientes ___educ, exper y tenure___, de manera conjunta, explican el **31.6%** de la variación en los salarios por hora.
+
+
+## 4. Actividad en equipos
+
+
+## Fuente
+
+_Wooldridge, Jeffrey (2015). Introducción a la econometría. Quinta edición. Cengage Learning Editores. México D.F._
