@@ -26,7 +26,7 @@ library(wooldridge)
 library(broom)
 ```
 
-La paquetería `wooldridge` nos permite utilizar los datos utilizados en ejemplos y en las actividades del libro **Introducción a la econometría** de [**Jeffrey M. Wooldridge**](https://twitter.com/jmwooldridge). Al cargar esta paquetería las bases de datos se encuentran disponibles en la memoria.
+La paquetería `wooldridge` nos permite utilizar los datos empleados en ejemplos y en las actividades del libro **Introducción a la econometría** de [**Jeffrey M. Wooldridge**](https://twitter.com/jmwooldridge). Al cargar esta paquetería las bases de datos se encuentran disponibles en la memoria.
 
 ## 2. Bases de datos
 
