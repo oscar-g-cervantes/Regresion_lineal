@@ -18,7 +18,7 @@ knitr::opts_chunk$set(fig.align = 'center', echo = TRUE)
 
 ## 1. Paqueterías
 
-Utilizaremos las siguientes paqueterías: `tidiverse`, `wooldridge`, `broom` y `jtools`.
+Utilizaremos las siguientes paqueterías: `tidiverse`, `wooldridge` y `broom`
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
