@@ -1,6 +1,6 @@
 ---
 title: "Regresión lineal y bondad de ajuste"
-author: "Oscar García Cervantes - Taller de economía cuantitativa VI"
+author: "Oscar García Cervantes - Taller de economía cuantitativa V y VI"
 date: "`r format(Sys.time(), '%A %d de %B, %Y')`"
 output:
      html_document:

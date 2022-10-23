@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Oscar García Cervantes - Taller de economía cuantitativa VI" />
+<meta name="author" content="Oscar García Cervantes - Taller de economía cuantitativa V y VI" />
 
 
 <title>Regresión lineal y bondad de ajuste</title>
@@ -251,8 +251,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Regresión lineal y bondad de ajuste</h1>
-<h4 class="author">Oscar García Cervantes - Taller de economía cuantitativa VI</h4>
-<h4 class="date">jueves 31 de marzo, 2022</h4>
+<h4 class="author">Oscar García Cervantes - Taller de economía cuantitativa V y VI</h4>
+<h4 class="date">viernes 21 de octubre, 2022</h4>
 
 </div>
 
@@ -394,7 +394,7 @@ summary(modelo1)</code></pre>
 ## Multiple R-squared:  0.1764, Adjusted R-squared:  0.1645 
 ## F-statistic: 14.78 on 2 and 138 DF,  p-value: 1.526e-06</code></pre>
 <pre class="r"><code>tidy(modelo1)</code></pre>
-<pre><code>## # A tibble: 3 x 5
+<pre><code>## # A tibble: 3 × 5
 ##   term        estimate std.error statistic    p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
 ## 1 (Intercept)  1.29       0.341      3.77  0.000238  
@@ -404,11 +404,12 @@ summary(modelo1)</code></pre>
 <p><span class="math display">\[\hat{colGPA}=1.29+0.453hsGPA+0.0094ACT+u\]</span></p>
 <p>Respecto a la bondad de ajuste obtenemos lo siguiente:</p>
 <pre class="r"><code>glance(modelo1)</code></pre>
-<pre><code>## # A tibble: 1 x 12
-##   r.squared adj.r.squared sigma statistic    p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.176         0.164 0.340      14.8 0.00000153     2  -46.6  101.  113.
-## # ... with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 12
+##   r.squ…¹ adj.r…² sigma stati…³ p.value    df logLik   AIC   BIC devia…⁴ df.re…⁵
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+## 1   0.176   0.164 0.340    14.8 1.53e-6     2  -46.6  101.  113.    16.0     138
+## # … with 1 more variable: nobs &lt;int&gt;, and abbreviated variable names
+## #   ¹​r.squared, ²​adj.r.squared, ³​statistic, ⁴​deviance, ⁵​df.residual</code></pre>
 <p>La <span class="math inline">\(R^2\)</span> obtenida nos indica que en esta muestra de estudiantes <span class="math inline">\(hsGPA\)</span> y <span class="math inline">\(ACT\)</span> juntos, explican de manera aproximada <strong>17.6%</strong> de la variación en el promedio de calificaciones en la universidad.</p>
 </div>
 <div id="ejemplo-3.2-ecuación-para-el-salario-por-hora" class="section level3">
@@ -420,7 +421,7 @@ summary(modelo1)</code></pre>
 <p>Realizamos la estimación miediante el método de MCO:</p>
 <pre class="r"><code>modelo2 &lt;- lm(log(wage) ~ educ + exper + tenure, data = wage1)
 tidy(modelo2)</code></pre>
-<pre><code>## # A tibble: 4 x 5
+<pre><code>## # A tibble: 4 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)  0.284     0.104        2.73 6.56e- 3
@@ -430,11 +431,12 @@ tidy(modelo2)</code></pre>
 <p>Obtenemos la siguiente función de regresión: <span class="math display">\[\hat{log(wage)}=.284+.092educ+.0041exper+.022tenure+u\]</span></p>
 <p>Respecto a la bondad de ajuste obtenemos lo siguiente:</p>
 <pre class="r"><code>glance(modelo2)</code></pre>
-<pre><code>## # A tibble: 1 x 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.316         0.312 0.441      80.4 9.13e-43     3  -314.  637.  658.
-## # ... with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 12
+##   r.squared adj.r.squa…¹ sigma stati…²  p.value    df logLik   AIC   BIC devia…³
+##       &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1     0.316        0.312 0.441    80.4 9.13e-43     3  -314.  637.  658.    101.
+## # … with 2 more variables: df.residual &lt;int&gt;, nobs &lt;int&gt;, and abbreviated
+## #   variable names ¹​adj.r.squared, ²​statistic, ³​deviance</code></pre>
 <p>La <span class="math inline">\(R^2\)</span> nos indica que en esta muestra las variables independientes <strong><em>educ, exper y tenure</em></strong>, de manera conjunta, explican el <strong>31.6%</strong> de la variación en los salarios por hora.</p>
 </div>
 </div>
